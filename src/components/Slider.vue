@@ -6,6 +6,7 @@
 import G2 from '@antv/g2'
 import G2Slider from '@antv/g2-plugin-slider'
 
+// G2Slider 坑
 window.G2 = G2
 
 export default {
@@ -57,36 +58,57 @@ export default {
   },
   watch: {
     width: 'handlePropChange',
-    height: 'handlePropChagne',
+    height: 'handlePropChange',
     padding: 'handlePropChange',
     xAis: 'handlePropChange',
     yAxis: 'handlePropChange',
-    // todo deep watch
-    data (val, oldVal) {
-      // todo shadow equal
-      this.silder.changeData(val)
-      this.silder.repaint()
+    data (val) {
+      this.slider.changeData(val)
+      this.slider.repaint()
     },
     start: 'handlePropChange',
     end: 'handlePropChange',
-    fillerStyle: 'handlePropChange',
-    backgroundStyle: 'handlePropChange',
-    scales: 'handlePropChange',
-    textStyle: 'handlePropChange',
-    handleStyle: 'handlePropChange',
-    backgroundChart: 'handlePropChange'
+    fillerStyle: {
+      handler: 'handlePropChange',
+      deep: true
+    },
+    backgroundStyle: {
+      handler: 'handlePropChange',
+      deep: true
+    },
+    scales: {
+      handler: 'handlePropChange',
+      deep: true
+    },
+    textStyle: {
+      handler: 'handlePropChange',
+      deep: true
+    },
+    handleStyle: {
+      handler: 'handlePropChange',
+      deep: true
+    },
+    backgroundChart: {
+      handler: 'handlePropChange',
+      deep: true
+    },
+    $props: {
+      handler () {
+        this.$nextTick(() => {
+          if (this.needRebuild) {
+            this.slider.destroy()
+            const slider = this.createSlider()
+            slider.render()
+            this.needRebuild = false
+          }
+        })
+      },
+      deep: true
+    }
   },
   mounted () {
     this.createSlider()
-  },
-  updated () {
-    if (!this.needRebuild) {
-      return
-    }
-    this.slider.destroy()
-    const slider = this.createSlider()
-    slider.render()
-    this.needRebuild = false
+    this.slider.render()
   },
   methods: {
     createSlider () {
@@ -100,8 +122,12 @@ export default {
       return this.slider
     },
     handlePropChange (val, oldVal) {
-      // todo shadowEqual
-      this.needRebuild = true
+      if (
+        ((typeof val === 'object' || Array.isArray(val)) && val === oldVal) ||
+        !G2.Util.isEqual(val, oldVal)
+      ) {
+        this.needRebuild = true
+      }
     }
   },
   beforeDestroy () {

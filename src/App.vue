@@ -1,9 +1,11 @@
 <template>
   <div id="app">
+    <button type="button" @click="test">test</button>
     <Slider
+      @change="handleChange"
       :fillerStyle="filler"
-      width="auto"
-      :height="26"
+      :width="width"
+      :height="height"
       xAxis="time"
       yAxis='value'
       :scales="scales"
@@ -49,11 +51,22 @@ export default {
           mask: 'M/DD H:mm'
         }
       },
-      originDv
+      originDv,
+      height: 25,
+      width: 200
     }
   },
   components: {
     Slider
+  },
+  methods: {
+    test () {
+      this.height += 5
+      this.width += 10
+    },
+    handleChange (...args) {
+      console.log(args)
+    }
   }
 }
 </script>
