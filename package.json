@@ -1,22 +1,24 @@
 {
   "name": "vue-bizcharts-plugin-slider",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.0.1",
+  "main": "lib/vue-bizcharts-plugin-slider.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --dest lib --target lib ./src/components/index.js --report",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "@antv/data-set": "^0.10.2",
     "@antv/g2": "^3.5.8-beta.1",
-    "@antv/g2-plugin-slider": "^2.1.1",
+    "@antv/g2-plugin-slider": "^2.1.1"
+  },
+  "peerDependencies": {
     "vue": "^2.6.10"
   },
   "devDependencies": {
-    "@vue/cli-plugin-e2e-cypress": "^3.10.0",
+    "@antv/data-set": "^0.10.2",
+    "vue": "^2.6.10",
     "@vue/cli-plugin-eslint": "^3.10.0",
     "@vue/cli-plugin-unit-jest": "^3.10.0",
     "@vue/cli-service": "^3.10.0",

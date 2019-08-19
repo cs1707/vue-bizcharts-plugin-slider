@@ -1,39 +1,14 @@
 # vue-bizcharts-plugin-slider
 
-## Project setup
+## Install
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+npm i vue-bizcharts-plugin-slider -S
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Quick Start
+``` javascript
+import Vue from 'vue'
+import Slider from 'vue-bizcharts-plugin-slider'
 
-### Run your tests
+Vue.use(Slider)
 ```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
