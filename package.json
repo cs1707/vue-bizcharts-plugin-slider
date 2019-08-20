@@ -1,6 +1,6 @@
 {
   "name": "vue-bizcharts-plugin-slider",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "lib/vue-bizcharts-plugin-slider.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
